@@ -1,44 +1,40 @@
-import java.util.HashMap;
+public abstract class User {
 
-public class User {
-    int user_id;
-    String name;
-    String role;
-    private User(int user_id,String name,String role){
-        this.user_id=user_id;
-        this.name=name;
-        this.role=role;
+    private int user_id;
+    private String user_name;
+    private String role;
+    protected User(Builder builder) {
+        this.user_id = builder.user_id;
+        this.user_name = builder.user_name;
+        this.role = builder.role;
     }
-    public int getUser(){
-        return this.user_id;
+    public String getInfo(){
+        return this.user_name;
     }
-    public String getName(){
-        return this.name;
-    }
-    public String getrole(){
-        return this.role;
-    }
-    public void setUser(int user_id){
-        this.user_id=user_id;
-    }
-    public void setName(String name){
-        this.name=name;
-    }
-    public void setRole(String role){
-        this.role=role;
-    }
-    public void Display(){
-        System.out.print(" I AM "+getName()+" role "+getrole());
-    }
-    //factory method
-    public static User createUser(int user_id,String name,String role){
-        if(user_id<=0){
-            throw new IllegalArgumentException("Invalid ID");
+   abstract public void Display();
+    
+
+    public static abstract class Builder {
+
+        private int user_id;
+        private String user_name;
+        private String role;
+
+        public Builder setUserid(int user_id) {
+            this.user_id = user_id;
+            return this;
         }
 
-        return new User(user_id,name,role);
+        public Builder setUsername(String user_name) {
+            this.user_name = user_name;
+            return this;
+        }
 
+        public Builder setRole(String role) {
+            this.role = role;
+            return this;
+        }
+
+        public abstract User build();
     }
-
-    
 }

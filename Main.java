@@ -2,15 +2,41 @@ import java.util.Scanner;
 
 public class Main {
     public static  void main(String[] args) {
-       
         Scanner sc=new Scanner(System.in);
-        Library library=new Library();
-        System.out.print("1.create user");
-        String name=sc.next();
-        String role=sc.next();
-        //User u= User.createUser(1,name,role);
-        Book b=new Book(1, "radhashyam", "librarian");
-        System.out.print(b.gettitile());
+       
+       System.out.print("hello please enter your name and id");
+       System.out.print("enter your name please");
+       String name=sc.next();
+       System.out.println("enter your id please:");
+       int id=sc.nextInt();
+       System.out.print("enter your role please:");
+       String role=sc.next();
+       UserFactory factory = new UserFactory();
+
+      User user = factory.createUser(role)
+        .setUserid(id)
+        .setUsername(name)
+        .build();
+
+        user.Display();
+
+        LibraryService libraryService =  LibraryService.getInstance();
+        libraryService.addBook(new Book(1,"marykom","neha"));
+        libraryService.addBook(new Book(1,"marykom","neha"));
+        libraryService.borrowBook(1, user);
+
+        libraryService.allBooks();
+        libraryService.getAllissuedBooks();
+
+        
+
+        
+
+       
+
+
+
+
         
 
        
